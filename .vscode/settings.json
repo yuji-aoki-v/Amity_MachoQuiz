@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Quize-自己趣味リレー.sln"
+    "dotnet.defaultSolution": "Amity_MachoQuiz.sln"
 }

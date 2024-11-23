@@ -49,10 +49,10 @@ public class GameManager : MonoBehaviour
     // ボタンの位置のランダム値リスト
     private Vector2[] positions = new Vector2[]
     {
-        new Vector2(-165, -100)
-        ,new Vector2(165, -100)
-        ,new Vector2(-165, -170)
-        ,new Vector2(165, -170)
+        new Vector2(-100, -10)
+        ,new Vector2(100, -10)
+        ,new Vector2(-100, -70)
+        ,new Vector2(100, -70)
     };
 
     // jsonファイル用のクラスと変数を定義
