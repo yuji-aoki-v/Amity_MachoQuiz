@@ -10,6 +10,10 @@ public class StageSelect : MonoBehaviour
         SceneManager.LoadScene("HobbyQuiz");
     }
 
+    public void MachoQuiz()
+    {
+        SceneManager.LoadScene("MachoQuiz");
+    }
     public void BackHome()
     {
         SceneManager.LoadScene("Home");
