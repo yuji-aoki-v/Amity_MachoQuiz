@@ -1,0 +1,127 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\yuji.aoki.et\\Amity\\Amity_MachoQuiz\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7183BB6D-45BA-459F-4DC4-3231391D72B9}|Assembly-CSharp.csproj|C:\\Users\\yuji.aoki.et\\Amity\\Amity_MachoQuiz\\assets\\displayquiz.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7183BB6D-45BA-459F-4DC4-3231391D72B9}|Assembly-CSharp.csproj|solutionrelative:assets\\displayquiz.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7183BB6D-45BA-459F-4DC4-3231391D72B9}|Assembly-CSharp.csproj|c:\\users\\yuji.aoki.et\\amity\\amity_machoquiz\\assets\\db\\quizdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7183BB6D-45BA-459F-4DC4-3231391D72B9}|Assembly-CSharp.csproj|solutionrelative:assets\\db\\quizdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7183BB6D-45BA-459F-4DC4-3231391D72B9}|Assembly-CSharp.csproj|c:\\users\\yuji.aoki.et\\amity\\amity_machoquiz\\assets\\dbmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7183BB6D-45BA-459F-4DC4-3231391D72B9}|Assembly-CSharp.csproj|solutionrelative:assets\\dbmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7183BB6D-45BA-459F-4DC4-3231391D72B9}|Assembly-CSharp.csproj|C:\\Users\\yuji.aoki.et\\Amity\\Amity_MachoQuiz\\assets\\db\\quiz.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7183BB6D-45BA-459F-4DC4-3231391D72B9}|Assembly-CSharp.csproj|solutionrelative:assets\\db\\quiz.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7183BB6D-45BA-459F-4DC4-3231391D72B9}|Assembly-CSharp.csproj|C:\\Users\\yuji.aoki.et\\Amity\\Amity_MachoQuiz\\assets\\db\\choice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7183BB6D-45BA-459F-4DC4-3231391D72B9}|Assembly-CSharp.csproj|solutionrelative:assets\\db\\choice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 10,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DBManager.cs",
+              "DocumentMoniker": "C:\\Users\\yuji.aoki.et\\Amity\\Amity_MachoQuiz\\Assets\\DBManager.cs",
+              "RelativeDocumentMoniker": "Assets\\DBManager.cs",
+              "ToolTip": "C:\\Users\\yuji.aoki.et\\Amity\\Amity_MachoQuiz\\Assets\\DBManager.cs",
+              "RelativeToolTip": "Assets\\DBManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-23T09:49:46.364Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "QuizDB.cs",
+              "DocumentMoniker": "C:\\Users\\yuji.aoki.et\\Amity\\Amity_MachoQuiz\\Assets\\DB\\QuizDB.cs",
+              "RelativeDocumentMoniker": "Assets\\DB\\QuizDB.cs",
+              "ToolTip": "C:\\Users\\yuji.aoki.et\\Amity\\Amity_MachoQuiz\\Assets\\DB\\QuizDB.cs",
+              "RelativeToolTip": "Assets\\DB\\QuizDB.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-23T09:45:32.196Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Choice.cs",
+              "DocumentMoniker": "C:\\Users\\yuji.aoki.et\\Amity\\Amity_MachoQuiz\\Assets\\DB\\Choice.cs",
+              "RelativeDocumentMoniker": "Assets\\DB\\Choice.cs",
+              "ToolTip": "C:\\Users\\yuji.aoki.et\\Amity\\Amity_MachoQuiz\\Assets\\DB\\Choice.cs",
+              "RelativeToolTip": "Assets\\DB\\Choice.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-23T09:43:09.575Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Quiz.cs",
+              "DocumentMoniker": "C:\\Users\\yuji.aoki.et\\Amity\\Amity_MachoQuiz\\Assets\\DB\\Quiz.cs",
+              "RelativeDocumentMoniker": "Assets\\DB\\Quiz.cs",
+              "ToolTip": "C:\\Users\\yuji.aoki.et\\Amity\\Amity_MachoQuiz\\Assets\\DB\\Quiz.cs",
+              "RelativeToolTip": "Assets\\DB\\Quiz.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-23T09:35:54.027Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DisplayQuiz.cs",
+              "DocumentMoniker": "C:\\Users\\yuji.aoki.et\\Amity\\Amity_MachoQuiz\\Assets\\DisplayQuiz.cs",
+              "RelativeDocumentMoniker": "Assets\\DisplayQuiz.cs",
+              "ToolTip": "C:\\Users\\yuji.aoki.et\\Amity\\Amity_MachoQuiz\\Assets\\DisplayQuiz.cs",
+              "RelativeToolTip": "Assets\\DisplayQuiz.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABIAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-23T08:02:13.749Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
