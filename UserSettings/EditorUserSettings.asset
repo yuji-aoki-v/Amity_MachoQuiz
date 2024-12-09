@@ -6,6 +6,18 @@ EditorUserSettings:
   serializedVersion: 4
   m_ConfigSettings:
     RecentlyUsedSceneGuid-0:
+      value: 0057525703540b030c560871407b5e44154f4b2f2e2e22607d7f1962b7b86d6e
+      flags: 0
+    RecentlyUsedSceneGuid-1:
+      value: 075504075003580f590a5e744622594413154f7e292924602e2c4e32e1b1676f
+      flags: 0
+    RecentlyUsedSceneGuid-2:
+      value: 5508025157535f025d5f5f7540200e44451641727470743679714f67bae5323b
+      flags: 0
+    RecentlyUsedSceneGuid-3:
+      value: 0108070357065e0a5e0c547613200a4410154d79747f77357f2a4f37e4e2636f
+      flags: 0
+    RecentlyUsedSceneGuid-4:
       value: 515250075c0c595e5f5a5e71122159444e4e4a2f7a7d7f602f284d66b4b76661
       flags: 0
     vcSharedLogLevel:
@@ -16,7 +28,7 @@ EditorUserSettings:
   m_VCDebugCmd: 0
   m_VCDebugOut: 0
   m_SemanticMergeMode: 2
-  m_DesiredImportWorkerCount: 4
+  m_DesiredImportWorkerCount: 7
   m_StandbyImportWorkerCount: 2
   m_IdleImportWorkerShutdownDelay: 60000
   m_VCShowFailedCheckout: 1

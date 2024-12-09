@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
-  productGUID: 906c99f08967c5c40a186ccbf166f74f
+  productGUID: c15fd08a560bd5d428ef06bc276dc1ca
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: MachoQuiz
+  productName: "Quize-\u81EA\u5DF1\u8DA3\u5473\u30EA\u30EC\u30FC"
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -586,7 +586,7 @@ PlayerSettings:
   webGLTemplate: APPLICATION:Default
   webGLAnalyzeBuildSize: 0
   webGLUseEmbeddedResources: 0
-  webGLCompressionFormat: 0
+  webGLCompressionFormat: 1
   webGLWasmArithmeticExceptions: 0
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
@@ -630,14 +630,14 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: MachoQuiz
+  metroPackageName: "Quize-\u81EA\u5DF1\u8DA3\u5473\u30EA\u30EC\u30FC"
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: MachoQuiz
+  metroApplicationDescription: "Quize-\u81EA\u5DF1\u8DA3\u5473\u30EA\u30EC\u30FC"
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -706,11 +706,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 33de22cf-9f33-402f-ad11-c9eebad95d85
+  cloudProjectId: 5693a3af-fcc0-46a9-8252-6072cb0c5d99
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: MachoQuiz 2024-09-13_19-21-24
-  organizationId: yuji_mikann
+  projectName: "Quize-\u81EA\u5DF1\u8DA3\u5473\u30EA\u30EC\u30FC"
+  organizationId: rengon
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

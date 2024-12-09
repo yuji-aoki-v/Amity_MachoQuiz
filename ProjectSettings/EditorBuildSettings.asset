@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Login.unity
+    guid: 69672f6901370c143a98882f48248efc
+  - enabled: 1
+    path: Assets/Scenes/Home.unity
+    guid: dd0a56144d266af4eb74eab0ce3ac137
+  - enabled: 1
+    path: Assets/Scenes/StageSelect.unity
+    guid: b93e23713b84cc54fb53871e2c2dfb77
+  - enabled: 1
     path: Assets/Scenes/HobbyQuiz.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
