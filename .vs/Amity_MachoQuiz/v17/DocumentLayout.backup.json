@@ -7,7 +7,7 @@
       "RelativeMoniker": "D:0:0:{7183BB6D-45BA-459F-4DC4-3231391D72B9}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7183BB6D-45BA-459F-4DC4-3231391D72B9}|Assembly-CSharp.csproj|c:\\users\\yuji.aoki.et\\amity\\amity_machoquiz\\assets\\scripts\\stageselect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7183BB6D-45BA-459F-4DC4-3231391D72B9}|Assembly-CSharp.csproj|C:\\Users\\yuji.aoki.et\\Amity\\Amity_MachoQuiz\\assets\\scripts\\stageselect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7183BB6D-45BA-459F-4DC4-3231391D72B9}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\stageselect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -67,8 +67,7 @@
               "RelativeToolTip": "Assets\\Scripts\\StageSelect.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-09T23:01:25.487Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-09T23:01:25.487Z"
             }
           ]
         }
