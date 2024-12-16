@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/HobbyQuiz.unity
+- path: Assets/Scenes/MachoQuiz.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

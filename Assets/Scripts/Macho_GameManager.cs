@@ -33,7 +33,7 @@ public class Macho_GameManager : MonoBehaviour
     public TextMeshProUGUI button1;
     public TextMeshProUGUI button2;
     public TextMeshProUGUI button3;
-    public TextMeshProUGUI button5;
+    public TextMeshProUGUI button4;
 
     // FirestoreのURL
     private string firestoreUrl = "https://firestore.googleapis.com/v1/projects/amity-4bad3/databases/(default)/documents/hobbyQuiz/quiz";
