@@ -21,7 +21,7 @@ public class Login : MonoBehaviour
 
     void Start()
     {
-        WebGLInput.captureAllKeyboardInput = true;
+        // WebGLInput.captureAllKeyboardInput = true;
         usernameField.onSelect.AddListener((string text) =>
         {
             OpenMobileKeyboard();
