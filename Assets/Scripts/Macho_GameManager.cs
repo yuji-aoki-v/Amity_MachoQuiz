@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq; // Newtonsoft.Jsonを使用するために必要 // 
 /*--------------------------------------------------------------------------------------------*/
 public class Macho_GameManager : MonoBehaviour
 {
+    // 大橋変更分
     // フィールド
     public int listNum; // クイズ数をカウント
     public int judge = 0; // 正解か不正解を判断する
@@ -135,11 +136,11 @@ public class Macho_GameManager : MonoBehaviour
         // 新しいコルーチンを開始
         coroutineStopJudge = 0;
         StartTime();
-        nextQuizUi.SetActive(false);
+        // nextQuizUi.SetActive(false);
         // ボダンランダム配置
         SetRandomPosition();
         GetDataFromFirestore();
-        nextQuizUi.SetActive(false);
+        // nextQuizUi.SetActive(false);
     }
 
     // クイズ開始
