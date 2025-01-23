@@ -93,7 +93,7 @@ public class Macho_GameManager : MonoBehaviour
         nextQuizeText.text = "スタート";
         nextQuizUi.SetActive(true);
     }
-
+// 変更
     void Update()
     {
         if (timeText.text == "0")
