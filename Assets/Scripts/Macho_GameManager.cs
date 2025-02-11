@@ -19,6 +19,10 @@ public class Macho_GameManager : MonoBehaviour
     public float typingSpeed = 0.02f; // 文章出すスピード
     private string fullText; // 問題文代入用
     private string currentText = ""; // 現在の問題文を徐々に代入
+    private bool isKeyDownEnabled = true; // KeyDownの有効・無効フラグ
+    private bool isKeyDownEnabledLeft = true; // 左プレイヤーのKeyDownの有効・無効フラグ
+    private bool isKeyDownEnabledRight = true; // 右プレイヤーのKeyDownの有効・無効フラグ
+    private int correctAnswerNum = 0; // 正解番号
 
     // オブジェクト用フィールド
     public GameObject correctUi; // 〇
@@ -93,13 +97,116 @@ public class Macho_GameManager : MonoBehaviour
         nextQuizeText.text = "スタート";
         nextQuizUi.SetActive(true);
     }
-// 変更
+
     void Update()
     {
         if (timeText.text == "0")
         {
             timeText.text = " ";
             StartCoroutine(TimeUp());
+        }
+
+        ControlLeftPlayer();
+        ControlRightPlayer();
+    }
+
+    // KeyDown イベントを有効化・無効化するメソッド
+    public void SetKeyDownEnabled(bool enabled)
+    {
+        isKeyDownEnabled = enabled;
+    }
+    // 左プレイヤーのKeyDown イベントを有効化・無効化するメソッド
+    public void SetKeyDownEnabledLeft(bool enabled)
+    {
+        isKeyDownEnabledLeft = enabled;
+    }
+    // 右プレイヤーのKeyDown イベントを有効化・無効化するメソッド
+    public void SetKeyDownEnabledRight(bool enabled)
+    {
+        isKeyDownEnabledRight = enabled;
+    }
+
+    // 正解判定するメソッド
+    // TODO: カリー化してプレイヤー番号を受け取る
+    public void JudgeKeyDown(int ansNum)
+    {
+        if (ansNum == correctAnswerNum) {
+            // TODO: プレイヤー番号に対応した人にポイント付与
+            NextQuiz_correct();
+        } else {
+            NextQuiz_incorrect();
+        }
+    }
+
+    public void ControlLeftPlayer()
+    {
+        // 無効化中は処理しない
+        if (!isKeyDownEnabled) return;
+        if (!isKeyDownEnabledLeft) return;
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            SetKeyDownEnabled(false);
+            SetKeyDownEnabledLeft(false);
+            
+            JudgeKeyDown(0);
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            SetKeyDownEnabled(false);
+            SetKeyDownEnabledLeft(false);
+            
+            JudgeKeyDown(1);
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            SetKeyDownEnabled(false);
+            SetKeyDownEnabledLeft(false);
+            
+            JudgeKeyDown(2);
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            SetKeyDownEnabled(false);
+            SetKeyDownEnabledLeft(false);
+            
+            JudgeKeyDown(3);
+        }
+    }
+
+    public void ControlRightPlayer()
+    {
+        // 無効化中は処理しない
+        if (!isKeyDownEnabled) return;
+        if (!isKeyDownEnabledRight) return;
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            SetKeyDownEnabled(false);
+            SetKeyDownEnabledRight(false);
+
+            JudgeKeyDown(0);
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            SetKeyDownEnabled(false);
+            SetKeyDownEnabledRight(false);
+            
+            JudgeKeyDown(1);
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            SetKeyDownEnabled(false);
+            SetKeyDownEnabledRight(false);
+            
+            JudgeKeyDown(2);
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            SetKeyDownEnabled(false);
+            SetKeyDownEnabledRight(false);
+            
+            JudgeKeyDown(3);
         }
     }
 
@@ -196,15 +303,26 @@ public class Macho_GameManager : MonoBehaviour
     {
         List<Vector2> availablePositions = new List<Vector2>(positions);
 
+        int firstRandomIndex = -1; // 初期値を設定
+
         foreach (RectTransform button in buttons)
         {
             // ランダムな位置を選択
             int randomIndex = Random.Range(0, availablePositions.Count);
+
+            // 正解のインデックスを記録（1回目のみ保存）
+            if (firstRandomIndex == -1)
+            {
+                firstRandomIndex = randomIndex;
+            }
+
             // 選択した位置をボタンに適用
             button.anchoredPosition = availablePositions[randomIndex];
             // 選択した位置をリストから削除
             availablePositions.RemoveAt(randomIndex);
         }
+
+        correctAnswerNum = firstRandomIndex;
     }
 
     // 問題の文章、選択肢を表示
@@ -220,6 +338,12 @@ public class Macho_GameManager : MonoBehaviour
         {
             quizNum.text = (listNum + 1).ToString();
             fullText = quizs[listNum].quiz_json;
+
+            // キー入力有効化
+            SetKeyDownEnabled(true);
+            SetKeyDownEnabledLeft(true);
+            SetKeyDownEnabledRight(true);
+
             StartCoroutine(TypeText());
             button1.text = quizs[listNum].button1_json;
             button2.text = quizs[listNum].button2_json;
