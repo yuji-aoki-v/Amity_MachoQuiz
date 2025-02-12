@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.Networking;
 using Newtonsoft.Json.Linq;
 using System.Linq; // .Last() を使用するために必要
+using UnityEngine.SceneManagement;
 
 public class HobbyQuizData : MonoBehaviour
 {
@@ -138,5 +139,10 @@ public class HobbyQuizData : MonoBehaviour
                 Debug.LogError("データの更新に失敗: " + request.error);
             }
         }
+    }
+
+    public void BackHome()
+    {
+        SceneManager.LoadScene("Home");
     }
 }
