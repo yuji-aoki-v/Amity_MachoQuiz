@@ -553,6 +553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contentPanel: {fileID: 1122377549}
   itemPrefab: {fileID: 4419353513222538855, guid: 6d715a0ea412be24794e7766f42fccb0, type: 3}
+  updateButtonPrefab: {fileID: 441722813575490725, guid: b361cd65ecef8d6498e56f5ddd2a3aff, type: 3}
 --- !u!1 &873743830
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,8 +762,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 97748655}
   m_HandleRect: {fileID: 97748654}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.9999956
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -839,7 +840,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00031422253, y: 254.5}
+  m_AnchoredPosition: {x: 0.00031422253, y: 254.49997}
   m_SizeDelta: {x: 261, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1122377550
