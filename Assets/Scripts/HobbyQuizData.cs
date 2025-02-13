@@ -91,7 +91,7 @@ public class HobbyQuizData : MonoBehaviour
                 layoutElement = updateButton.gameObject.AddComponent<LayoutElement>();
             }
             layoutElement.preferredWidth = 200f;
-            layoutElement.preferredHeight = 50f;
+            layoutElement.preferredHeight = 30f;
             updateButton.onClick.AddListener(() => UpdateFirestoreData(documentId, inputFields)); // ボタンのクリックイベント
         }
     }
@@ -144,6 +144,6 @@ public class HobbyQuizData : MonoBehaviour
 
     public void BackHome()
     {
-        SceneManager.LoadScene("Home");
+        SceneManager.LoadScene("DataSelect");
     }
 }
