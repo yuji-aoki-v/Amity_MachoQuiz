@@ -14,6 +14,8 @@ public class MachoQuizData : MonoBehaviour
     public Button updateButtonPrefab; // 更新ボタンのPrefab
 
     private string firestoreUrl = "https://firestore.googleapis.com/v1/projects/amity-4bad3/databases/(default)/documents/machoQuiz";
+    public GameObject canvasData;
+    public GameObject canvasAdd;
     
     void Start()
     {
@@ -70,6 +72,7 @@ public class MachoQuizData : MonoBehaviour
             if (inputFields.Length >= 6)  // フィールドが6つあることを確認
             {
                 inputFields[0].text = documentId;  // ドキュメントIDを表示
+                inputFields[0].readOnly = true;
                 inputFields[1].text = quizText;    // クイズテキスト
                 inputFields[2].text = button1;     // 選択肢1
                 inputFields[3].text = button2;     // 選択肢2
@@ -144,5 +147,17 @@ public class MachoQuizData : MonoBehaviour
     public void BackHome()
     {
         SceneManager.LoadScene("Home");
+    }
+
+    public void AddData()
+    {
+        canvasData.SetActive(false);
+        canvasAdd.SetActive(true);
+    }
+
+    public void RevisionData()
+    {
+        canvasData.SetActive(true);
+        canvasAdd.SetActive(false);
     }
 }

@@ -70,6 +70,7 @@ public class HobbyQuizData : MonoBehaviour
             if (inputFields.Length >= 6)  // フィールドが6つあることを確認
             {
                 inputFields[0].text = documentId;  // ドキュメントIDを表示
+                inputFields[0].readOnly = true;
                 inputFields[1].text = quizText;    // クイズテキスト
                 inputFields[2].text = button1;     // 選択肢1
                 inputFields[3].text = button2;     // 選択肢2
