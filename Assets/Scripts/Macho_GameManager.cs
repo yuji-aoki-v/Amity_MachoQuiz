@@ -12,6 +12,7 @@ using Newtonsoft.Json.Linq; // Newtonsoft.Jsonを使用するために必要 // 
 public class Macho_GameManager : MonoBehaviour
 {
     // フィールド
+
     public int listNum; // クイズ数をカウント
     public int judge = 0; // 正解か不正解を判断する
     public int correctCount = 0; // 正解数
@@ -29,6 +30,14 @@ public class Macho_GameManager : MonoBehaviour
     private int correctAnswerNum = 0; // 正解番号
 
     // オブジェクト用フィールド
+    public GameObject Q_Button;
+    public GameObject W_Button;
+    public GameObject A_Button;
+    public GameObject S_Button;
+    public GameObject I_Button;
+    public GameObject O_Button;
+    public GameObject K_Button;
+    public GameObject L_Button;
     public GameObject right_correctUi; // 〇
     public GameObject left_correctUi; // 〇
     public GameObject right_incorrectUi; // ×
@@ -140,6 +149,13 @@ public class Macho_GameManager : MonoBehaviour
     // TODO: カリー化してプレイヤー番号を受け取る
     public void JudgeKeyDown(int ansNum)
     {
+        if(player == "rightPlayer")
+        {
+            right_ele.SetActive(true);
+        }else if(player == "leftPlayer")
+        {
+            left_ele.SetActive(true);
+        }
         if (ansNum == correctAnswerNum) {
             // TODO: プレイヤー番号に対応した人にポイント付与
             PointUi("correct");
@@ -183,6 +199,7 @@ public class Macho_GameManager : MonoBehaviour
             SetKeyDownEnabled(false);
             SetKeyDownEnabledLeft(false);
             
+            Q_Button.GetComponent<Image>().color = Color.green; Invoke("ResetButtonColor", 1f);
             player = "leftPlayer";
             JudgeKeyDown(0);
         }
@@ -191,6 +208,7 @@ public class Macho_GameManager : MonoBehaviour
             SetKeyDownEnabled(false);
             SetKeyDownEnabledLeft(false);
             
+            W_Button.GetComponent<Image>().color = Color.green; Invoke("ResetButtonColor", 1f);
             player = "leftPlayer";
             JudgeKeyDown(1);
         }
@@ -199,6 +217,7 @@ public class Macho_GameManager : MonoBehaviour
             SetKeyDownEnabled(false);
             SetKeyDownEnabledLeft(false);
             
+            A_Button.GetComponent<Image>().color = Color.green; Invoke("ResetButtonColor", 1f);
             player = "leftPlayer";
             JudgeKeyDown(2);
         }
@@ -207,6 +226,7 @@ public class Macho_GameManager : MonoBehaviour
             SetKeyDownEnabled(false);
             SetKeyDownEnabledLeft(false);
             
+            S_Button.GetComponent<Image>().color = Color.green; Invoke("ResetButtonColor", 1f);
             player = "leftPlayer";
             JudgeKeyDown(3);
         }
@@ -223,6 +243,7 @@ public class Macho_GameManager : MonoBehaviour
             SetKeyDownEnabled(false);
             SetKeyDownEnabledRight(false);
 
+            I_Button.GetComponent<Image>().color = Color.green; Invoke("ResetButtonColor", 1f);
             player = "rightPlayer";
             JudgeKeyDown(0);
         }
@@ -231,6 +252,7 @@ public class Macho_GameManager : MonoBehaviour
             SetKeyDownEnabled(false);
             SetKeyDownEnabledRight(false);
             
+            O_Button.GetComponent<Image>().color = Color.green; Invoke("ResetButtonColor", 1f);
             player = "rightPlayer";
             JudgeKeyDown(1);
         }
@@ -239,6 +261,7 @@ public class Macho_GameManager : MonoBehaviour
             SetKeyDownEnabled(false);
             SetKeyDownEnabledRight(false);
             
+            K_Button.GetComponent<Image>().color = Color.green; Invoke("ResetButtonColor", 1f);
             player = "rightPlayer";
             JudgeKeyDown(2);
         }
@@ -247,6 +270,7 @@ public class Macho_GameManager : MonoBehaviour
             SetKeyDownEnabled(false);
             SetKeyDownEnabledRight(false);
             
+            L_Button.GetComponent<Image>().color = Color.green; Invoke("ResetButtonColor", 1f);
             player = "rightPlayer";
             JudgeKeyDown(3);
         }
@@ -459,6 +483,8 @@ public class Macho_GameManager : MonoBehaviour
     // 〇×を表示する
     void UiDisplayOn(int judge)
     {
+        right_ele.SetActive(false);
+        left_ele.SetActive(false);
         if (judge == 0)
         {
             if(player == "rightPlayer")
@@ -500,6 +526,14 @@ public class Macho_GameManager : MonoBehaviour
     void ResetButtonColor()
     {
         correctButton.GetComponent<Image>().color = Color.white; // 元の色に戻す
+        Q_Button.GetComponent<Image>().color = Color.white;
+        W_Button.GetComponent<Image>().color = Color.white;
+        A_Button.GetComponent<Image>().color = Color.white;
+        S_Button.GetComponent<Image>().color = Color.white;
+        I_Button.GetComponent<Image>().color = Color.white;
+        O_Button.GetComponent<Image>().color = Color.white;
+        K_Button.GetComponent<Image>().color = Color.white;
+        L_Button.GetComponent<Image>().color = Color.white;
     }
 
     // 再挑戦

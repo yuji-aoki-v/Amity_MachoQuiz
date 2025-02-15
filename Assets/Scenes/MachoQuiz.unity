@@ -381,7 +381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9724556, g: 1, b: 0.9669811, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -870,12 +870,12 @@ GameObject:
   - component: {fileID: 250876636}
   - component: {fileID: 250876635}
   m_Layer: 5
-  m_Name: right-electricity
+  m_Name: left-electricity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &250876634
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4144,12 +4144,12 @@ GameObject:
   - component: {fileID: 1203614739}
   - component: {fileID: 1203614738}
   m_Layer: 5
-  m_Name: left-electricity (1)
+  m_Name: right-electricity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1203614737
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4593,12 +4593,20 @@ MonoBehaviour:
   coroutineStopJudge: 0
   typingSpeed: 0.05
   player: 
+  Q_Button: {fileID: 122052973}
+  W_Button: {fileID: 996953996}
+  A_Button: {fileID: 84207535}
+  S_Button: {fileID: 764509949}
+  I_Button: {fileID: 1001681529}
+  O_Button: {fileID: 1457896713}
+  K_Button: {fileID: 952444168}
+  L_Button: {fileID: 2066761049}
   right_correctUi: {fileID: 894211932}
   left_correctUi: {fileID: 675478709}
   right_incorrectUi: {fileID: 787369020}
   left_incorrectUi: {fileID: 1308572883}
-  right_ele: {fileID: 0}
-  left_ele: {fileID: 0}
+  right_ele: {fileID: 1203614736}
+  left_ele: {fileID: 250876633}
   nextQuizUi: {fileID: 861275604}
   resultUi: {fileID: 894760906}
   timeUpUi: {fileID: 1051032299}
