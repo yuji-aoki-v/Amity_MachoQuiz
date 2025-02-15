@@ -11,8 +11,8 @@ public class AttackLeft : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Attack_Left()
     {
-        
+        GetComponent<Animator>().SetTrigger("Attack Left");
     }
 }

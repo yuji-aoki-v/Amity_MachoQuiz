@@ -12,7 +12,10 @@ using Newtonsoft.Json.Linq; // Newtonsoft.Jsonを使用するために必要 // 
 public class Macho_GameManager : MonoBehaviour
 {
     // フィールド
-
+    private AttackRight attackright;
+    private AttackLeft attackleft;
+    private BanditRight banditright;
+    private BanditLeft banditleft;
     public int listNum; // クイズ数をカウント
     public int judge = 0; // 正解か不正解を判断する
     public int correctCount = 0; // 正解数
@@ -30,6 +33,7 @@ public class Macho_GameManager : MonoBehaviour
     private int correctAnswerNum = 0; // 正解番号
 
     // オブジェクト用フィールド
+    private Animator animator;
     public AudioSource correctAudio;
     public AudioSource incorrectAudio;
     //public AudioSource quizAudio;
@@ -109,6 +113,10 @@ public class Macho_GameManager : MonoBehaviour
     // jsonファイル読み込み＆初回表示
     void Start()
     {
+        attackright = FindObjectOfType<AttackRight>();
+        attackleft = FindObjectOfType<AttackLeft>();
+        banditright = FindObjectOfType<BanditRight>();
+        banditleft = FindObjectOfType<BanditLeft>();
         correctAudio = GameObject.Find("correctAudio").GetComponent<AudioSource>();
         incorrectAudio = GameObject.Find("incorrectAudio").GetComponent<AudioSource>();
         //quizAudio = GameObject.Find("quizAudio").GetComponent<AudioSource>();
@@ -470,6 +478,20 @@ public class Macho_GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         UiDisplayOn(judge);
+        if(judge == 1)
+        {
+            if(player == "rightPlayer")
+            {
+                attackright.Attack_Right();
+                yield return new WaitForSeconds(0.6f);
+                banditright.Death();
+            }else
+            {
+                attackleft.Attack_Left();
+                yield return new WaitForSeconds(0.6f);
+                banditleft.Death();
+            }
+        }
         correctButton.GetComponent<Image>().color = Color.green; Invoke("ResetButtonColor", 3f);
         yield return new WaitForSeconds(3f);
         UiDisplayOff(judge);
@@ -488,6 +510,14 @@ public class Macho_GameManager : MonoBehaviour
             {
                 //ゲームオーバー処理
                 Canvas.SetActive(false);
+                attackright.Attack_Right();
+                yield return new WaitForSeconds(0.9f);
+                banditright.DeathGame();
+                yield return new WaitForSeconds(1f);
+                attackleft.Attack_Left();
+                yield return new WaitForSeconds(0.7f);
+                banditleft.DeathGame();
+
                 yield return new WaitForSeconds(3f);
                 resultText.text = "ゲームオーバー";
             }else if(quizNum.text == "7")
