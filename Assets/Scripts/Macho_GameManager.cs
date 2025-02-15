@@ -56,10 +56,10 @@ public class Macho_GameManager : MonoBehaviour
     // ボタンの位置のランダム値リスト
     private Vector2[] positions = new Vector2[]
     {
-        new Vector2(-100, -10)
-        ,new Vector2(100, -10)
-        ,new Vector2(-100, -70)
-        ,new Vector2(100, -70)
+        new Vector2(-104, -95)
+        ,new Vector2(96,-95)
+        ,new Vector2(-104,-155)
+        ,new Vector2(96, -155)
     };
 
     // jsonファイル用のクラスと変数を定義
@@ -255,6 +255,7 @@ public class Macho_GameManager : MonoBehaviour
     {
         timeText.text = " ";
         StartCoroutine(NextQuiz_coroutine(1));
+        GetComponent<Animator>().SetTrigger("Attack Right");
     }
 
     // 正解不正解判定
