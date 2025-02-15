@@ -20,4 +20,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MachoQuiz.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/DataSelect.unity
+    guid: 08e52819c5d98dc49befbe8c0bebbab9
+  - enabled: 1
+    path: Assets/Scenes/MachoQuizData.unity
+    guid: d0b4dd1e57c4ca64dabcbc02ec93d678
+  - enabled: 1
+    path: Assets/Scenes/HobbyQuizData.unity
+    guid: 7d7fd2e7d90c2554d8467374b59e0fec
   m_configObjects: {}

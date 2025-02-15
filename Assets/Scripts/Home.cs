@@ -15,6 +15,12 @@ public class Home : MonoBehaviour
     {
         SceneManager.LoadScene("Login");
     }
+
+    public void QuizData()
+    {
+        SceneManager.LoadScene("DataSelect");
+    }
+
     public void Credits()
     {
         creditUi.SetActive(true);
@@ -24,4 +30,5 @@ public class Home : MonoBehaviour
     {
         creditUi.SetActive(false);
     }
+
 }
