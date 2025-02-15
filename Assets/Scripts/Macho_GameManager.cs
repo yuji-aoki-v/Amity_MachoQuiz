@@ -14,7 +14,12 @@ public class Macho_GameManager : MonoBehaviour
     // フィールド
     public int listNum; // クイズ数をカウント
     public int judge = 0; // 正解か不正解を判断する
-    public int correctCount = 0; // 正解数
+    public int godPoint = 0; //　神様ポイントを定義(1問不正解するごとに1ポイントたまり3問不正解したら神様につぶされてゲームオーバーになる)
+    public int playerPoint1 = 0; //　プレイヤー1の正解数を定義(1問正解するごとに1ポイントたまり3問正解したら勝ちとなる)
+    public int playerPoint2 = 0; //　プレイヤー2の正解数を定義(1問正解するごとに1ポイントたまり3問正解したら勝ちとなる)
+    const int deathPoint = 3; // プレイヤーがゲームオーバーになる点数
+    const int winPointPlayer1 = 3; // プレイヤー1との勝ち得点
+    const int winPointPlayer2 = 3; // プレイヤー2の勝ち得点
     public int coroutineStopJudge = 0; // コルーチン停止判定
     public float typingSpeed = 0.02f; // 文章出すスピード
     private string fullText; // 問題文代入用
@@ -244,8 +249,8 @@ public class Macho_GameManager : MonoBehaviour
     {
         timeText.text = " ";
         StartCoroutine(NextQuiz_coroutine(0));
-        correctCount ++;
-        resultNumber.text = correctCount.ToString();
+        playerPoint1 += 1;
+        resultNumber.text = playerPoint1.ToString();
         coroutineStopJudge = 1;
     }
 
@@ -254,6 +259,7 @@ public class Macho_GameManager : MonoBehaviour
     {
         timeText.text = " ";
         StartCoroutine(NextQuiz_coroutine(1));
+        godPoint += 1;
     }
 
     // 正解不正解判定
@@ -320,6 +326,29 @@ public class Macho_GameManager : MonoBehaviour
         SceneManager.LoadScene("Home");
     }
 
+    // クイズが終了したときの共通の処理
+    public void quizReset()
+    {
+        quizNum.text = "";
+        quiz.text = "";
+        button1.text = "";
+        button2.text = "";
+        button3.text = "";
+        button4.text = "";
+        StopTimeLimit();
+    }
+    public void GodHandCrusher()
+    {
+        Debug.Log("お前はもう死んでいる。");
+        quizReset();
+        resultUi.SetActive(true);
+    }
+    public void thunderForce()
+    {
+        Debug.Log("お前の勝ちだ。");
+        quizReset();
+        resultUi.SetActive(true);
+    }
 /*--------------------------------------------------------------------------------------------*/
     // Firebaseに関するコード
     public void GetDataFromFirestore()
@@ -331,8 +360,18 @@ public class Macho_GameManager : MonoBehaviour
     {
         // 含まれていない数字を取得
         possibleNumbers = possibleNumbers.Except(displayedQuizIndices).ToList();
+        // 神様ポイントが3ポイントになった時
+        if(godPoint >= deathPoint){
+            GodHandCrusher();
+            yield break;
+        }
+        // プレイヤーポイントが3ポイントになったとき
+        else if(playerPoint1 >= winPointPlayer1){
+            thunderForce();
+            yield break;
+        }
         // 含まれていない数字が存在する場合&クイズの出題数が5問以下の時
-        if (possibleNumbers.Count > 0 && listNum < 5)
+        else if (possibleNumbers.Count > 0 && listNum < 5)
         {
             randomNumber = possibleNumbers[Random.Range(0, possibleNumbers.Count)]; // ランダムに選択
             displayedQuizIndices.Add(randomNumber); // 選ばれた数字をリストに追加
@@ -340,12 +379,7 @@ public class Macho_GameManager : MonoBehaviour
         else
         {
             Debug.Log("すべての数字が表示済みです。");
-            quizNum.text = "";
-            quiz.text = "";
-            button1.text = "";
-            button2.text = "";
-            button3.text = "";
-            button4.text = "";
+            quizReset();
             resultUi.SetActive(true);
             yield break;
         }
