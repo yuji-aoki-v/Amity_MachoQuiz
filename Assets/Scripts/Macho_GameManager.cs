@@ -47,6 +47,8 @@ public class Macho_GameManager : MonoBehaviour
     public GameObject O_Button;
     public GameObject K_Button;
     public GameObject L_Button;
+    public GameObject correctUi; // 〇
+    public GameObject incorrectUi; // ×
     public GameObject right_correctUi; // 〇
     public GameObject left_correctUi; // 〇
     public GameObject right_incorrectUi; // ×
@@ -327,6 +329,7 @@ public class Macho_GameManager : MonoBehaviour
     // 次のクイズへ
     public void NextQuiz()
     {
+        player = "";
         // タイムリミットリセット処理
         StartOrResetTimeLimit();
         // 新しいコルーチンを開始
@@ -485,7 +488,7 @@ public class Macho_GameManager : MonoBehaviour
                 attackright.Attack_Right();
                 yield return new WaitForSeconds(0.6f);
                 banditright.Death();
-            }else
+            }else if(player == "leftPlayer")
             {
                 attackleft.Attack_Left();
                 yield return new WaitForSeconds(0.6f);
@@ -547,6 +550,9 @@ public class Macho_GameManager : MonoBehaviour
             }else if(player == "leftPlayer")
             {
                 left_correctUi.SetActive(true);
+            }else
+            {
+                correctUi.SetActive(true);
             }
         }
         else
@@ -558,6 +564,9 @@ public class Macho_GameManager : MonoBehaviour
             }else if(player == "leftPlayer")
             {
                 left_incorrectUi.SetActive(true);
+            }else
+            {
+                incorrectUi.SetActive(true);
             }
         }
     }
@@ -569,11 +578,13 @@ public class Macho_GameManager : MonoBehaviour
         {
             right_correctUi.SetActive(false);
             left_correctUi.SetActive(false);
+            correctUi.SetActive(false);
         }
         else
         {
             right_incorrectUi.SetActive(false);
             left_incorrectUi.SetActive(false);
+            incorrectUi.SetActive(false);
         }
     }
 
