@@ -31,4 +31,14 @@ public class Home : MonoBehaviour
         creditUi.SetActive(false);
     }
 
+    public void ScreenMini()
+    {
+        Screen.fullScreen = false;
+    }
+
+    public void ScreenBig()
+    {
+        Screen.fullScreen = true;
+    }
+
 }
