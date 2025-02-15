@@ -20,6 +20,7 @@ public class Macho_GameManager : MonoBehaviour
     public int god_correctCount = 0; // 正解数
     public int coroutineStopJudge = 0; // コルーチン停止判定
     public float typingSpeed = 0.02f; // 文章出すスピード
+    public string player = "";
     private string fullText; // 問題文代入用
     private string currentText = ""; // 現在の問題文を徐々に代入
     private bool isKeyDownEnabled = true; // KeyDownの有効・無効フラグ
@@ -28,8 +29,12 @@ public class Macho_GameManager : MonoBehaviour
     private int correctAnswerNum = 0; // 正解番号
 
     // オブジェクト用フィールド
-    public GameObject correctUi; // 〇
-    public GameObject incorrectUi; // ×
+    public GameObject right_correctUi; // 〇
+    public GameObject left_correctUi; // 〇
+    public GameObject right_incorrectUi; // ×
+    public GameObject left_incorrectUi; // ×
+    public GameObject right_ele;
+    public GameObject left_ele;
     public GameObject nextQuizUi; // クイズ進行画面
     public GameObject resultUi; // リザルト画面
     public GameObject timeUpUi;
@@ -133,19 +138,19 @@ public class Macho_GameManager : MonoBehaviour
 
     // 正解判定するメソッド
     // TODO: カリー化してプレイヤー番号を受け取る
-    public void JudgeKeyDown(int ansNum, string player)
+    public void JudgeKeyDown(int ansNum)
     {
         if (ansNum == correctAnswerNum) {
             // TODO: プレイヤー番号に対応した人にポイント付与
-            PointUi(player, "correct");
+            PointUi("correct");
             NextQuiz_correct();
         } else {
-            PointUi(player, "incorrect");
+            PointUi("incorrect");
             NextQuiz_incorrect();
         }
     }
 
-    public void PointUi(string player, string correctjudge)
+    public void PointUi(string correctjudge)
     {
         if (correctjudge == "correct") 
         {
@@ -178,28 +183,32 @@ public class Macho_GameManager : MonoBehaviour
             SetKeyDownEnabled(false);
             SetKeyDownEnabledLeft(false);
             
-            JudgeKeyDown(0, "leftPlayer");
+            player = "leftPlayer";
+            JudgeKeyDown(0);
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
             SetKeyDownEnabled(false);
             SetKeyDownEnabledLeft(false);
             
-            JudgeKeyDown(1, "leftPlayer");
+            player = "leftPlayer";
+            JudgeKeyDown(1);
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
             SetKeyDownEnabled(false);
             SetKeyDownEnabledLeft(false);
             
-            JudgeKeyDown(2, "leleftPlayer");
+            player = "leftPlayer";
+            JudgeKeyDown(2);
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
             SetKeyDownEnabled(false);
             SetKeyDownEnabledLeft(false);
             
-            JudgeKeyDown(3, "leftPlayer");
+            player = "leftPlayer";
+            JudgeKeyDown(3);
         }
     }
 
@@ -214,28 +223,32 @@ public class Macho_GameManager : MonoBehaviour
             SetKeyDownEnabled(false);
             SetKeyDownEnabledRight(false);
 
-            JudgeKeyDown(0, "rightPlayer");
+            player = "rightPlayer";
+            JudgeKeyDown(0);
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
             SetKeyDownEnabled(false);
             SetKeyDownEnabledRight(false);
             
-            JudgeKeyDown(1, "rightPlayer");
+            player = "rightPlayer";
+            JudgeKeyDown(1);
         }
         if (Input.GetKeyDown(KeyCode.K))
         {
             SetKeyDownEnabled(false);
             SetKeyDownEnabledRight(false);
             
-            JudgeKeyDown(2, "rightPlayer");
+            player = "rightPlayer";
+            JudgeKeyDown(2);
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
             SetKeyDownEnabled(false);
             SetKeyDownEnabledRight(false);
             
-            JudgeKeyDown(3, "rightPlayer");
+            player = "rightPlayer";
+            JudgeKeyDown(3);
         }
     }
 
@@ -448,11 +461,23 @@ public class Macho_GameManager : MonoBehaviour
     {
         if (judge == 0)
         {
-            correctUi.SetActive(true);
+            if(player == "rightPlayer")
+            {
+                right_correctUi.SetActive(true);
+            }else if(player == "leftPlayer")
+            {
+                left_correctUi.SetActive(true);
+            }
         }
         else
         {
-            incorrectUi.SetActive(true);
+            if(player == "rightPlayer")
+            {
+                right_incorrectUi.SetActive(true);
+            }else if(player == "leftPlayer")
+            {
+                left_incorrectUi.SetActive(true);
+            }
         }
     }
 
@@ -461,12 +486,13 @@ public class Macho_GameManager : MonoBehaviour
     {
         if (judge == 0)
         {
-            correctUi.SetActive(false);
-            // mukimuki[correctCount - 1].GetComponent<SpriteRenderer>().color = new Color(mukimuki[0].GetComponent<SpriteRenderer>().color.r, mukimuki[0].GetComponent<SpriteRenderer>().color.g, mukimuki[0].GetComponent<SpriteRenderer>().color.b, 1f);
+            right_correctUi.SetActive(false);
+            left_correctUi.SetActive(false);
         }
         else
         {
-            incorrectUi.SetActive(false);
+            right_incorrectUi.SetActive(false);
+            left_incorrectUi.SetActive(false);
         }
     }
 
