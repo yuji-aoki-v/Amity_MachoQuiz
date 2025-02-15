@@ -30,6 +30,8 @@ public class Macho_GameManager : MonoBehaviour
     private int correctAnswerNum = 0; // 正解番号
 
     // オブジェクト用フィールド
+    public GameObject Panel;
+    public GameObject Canvas;
     public GameObject Q_Button;
     public GameObject W_Button;
     public GameObject A_Button;
@@ -124,9 +126,14 @@ public class Macho_GameManager : MonoBehaviour
             timeText.text = " ";
             StartCoroutine(TimeUp());
         }
-
-        ControlLeftPlayer();
-        ControlRightPlayer();
+        if(Panel.activeSelf)
+        {
+            
+        }else
+        {
+            ControlLeftPlayer();
+            ControlRightPlayer();  
+        }
     }
 
     // KeyDown イベントを有効化・無効化するメソッド
@@ -312,6 +319,7 @@ public class Macho_GameManager : MonoBehaviour
         // ボダンランダム配置
         SetRandomPosition();
         GetDataFromFirestore();
+        Panel.SetActive(false);
         // nextQuizUi.SetActive(false);
     }
 
@@ -432,6 +440,7 @@ public class Macho_GameManager : MonoBehaviour
     // 正解の場合
     public void NextQuiz_correct()
     {
+        Panel.SetActive(true);
         timeText.text = " ";
         StartCoroutine(NextQuiz_coroutine(0));
         correctCount ++;
@@ -441,6 +450,7 @@ public class Macho_GameManager : MonoBehaviour
     // 不正解の場合
     public void NextQuiz_incorrect()
     {
+        Panel.SetActive(true);
         timeText.text = " ";
         StartCoroutine(NextQuiz_coroutine(1));
     }
@@ -467,11 +477,14 @@ public class Macho_GameManager : MonoBehaviour
             }else if(god_correctCount==3)
             {
                 //ゲームオーバー処理
+                Canvas.SetActive(false);
+                yield return new WaitForSeconds(3f);
                 resultText.text = "ゲームオーバー";
             }else if(quizNum.text == "7")
             {
                 resultText.text = correctCount.ToString() + "問 正解しました。";
             }
+            Panel.SetActive(false);
             resultUi.SetActive(true);
         }
         else
