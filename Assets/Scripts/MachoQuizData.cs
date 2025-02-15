@@ -68,6 +68,10 @@ public class MachoQuizData : MonoBehaviour
             GameObject newItem = Instantiate(itemPrefab, contentPanel);
 
             TMP_InputField[] inputFields = newItem.GetComponentsInChildren<TMP_InputField>();
+            foreach (TMP_InputField inputField in inputFields)
+            {
+                inputField.inputType = TMP_InputField.InputType.Standard;
+            }
 
             if (inputFields.Length >= 6)  // フィールドが6つあることを確認
             {
