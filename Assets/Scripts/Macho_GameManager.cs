@@ -674,4 +674,9 @@ public class Macho_GameManager : MonoBehaviour
     {
         public string stringValue; // 各フィールドの値
     }
+
+    public void StageSelect()
+    {
+        SceneManager.LoadScene("StageSelect");
+    }
 }
