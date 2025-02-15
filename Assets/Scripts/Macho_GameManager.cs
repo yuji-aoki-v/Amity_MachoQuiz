@@ -30,6 +30,9 @@ public class Macho_GameManager : MonoBehaviour
     private int correctAnswerNum = 0; // 正解番号
 
     // オブジェクト用フィールド
+    public AudioSource correctAudio;
+    public AudioSource incorrectAudio;
+    //public AudioSource quizAudio;
     public GameObject Panel;
     public GameObject Canvas;
     public GameObject Q_Button;
@@ -106,6 +109,9 @@ public class Macho_GameManager : MonoBehaviour
     // jsonファイル読み込み＆初回表示
     void Start()
     {
+        correctAudio = GameObject.Find("correctAudio").GetComponent<AudioSource>();
+        incorrectAudio = GameObject.Find("incorrectAudio").GetComponent<AudioSource>();
+        //quizAudio = GameObject.Find("quizAudio").GetComponent<AudioSource>();
         // 変数初期化
         listNum = 0;
         // 1からxまでの数字をリストに追加(x=クイズ数)
@@ -322,6 +328,7 @@ public class Macho_GameManager : MonoBehaviour
         // ボダンランダム配置
         SetRandomPosition();
         GetDataFromFirestore();
+        //quizAudio.Play();
         Panel.SetActive(false);
         // nextQuizUi.SetActive(false);
     }
@@ -503,6 +510,7 @@ public class Macho_GameManager : MonoBehaviour
         left_ele.SetActive(false);
         if (judge == 0)
         {
+            correctAudio.Play();
             if(player == "rightPlayer")
             {
                 right_correctUi.SetActive(true);
@@ -513,6 +521,7 @@ public class Macho_GameManager : MonoBehaviour
         }
         else
         {
+            incorrectAudio.Play();
             if(player == "rightPlayer")
             {
                 right_incorrectUi.SetActive(true);
