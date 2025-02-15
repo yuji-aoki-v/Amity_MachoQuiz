@@ -165,31 +165,34 @@ public class Macho_GameManager : MonoBehaviour
         }
         if (ansNum == correctAnswerNum) {
             // TODO: プレイヤー番号に対応した人にポイント付与
-            PointUi("correct");
             NextQuiz_correct();
+            StartCoroutine(PointUi("correct"));
         } else {
-            PointUi("incorrect");
             NextQuiz_incorrect();
+            StartCoroutine(PointUi("incorrect"));
         }
     }
 
-    public void PointUi(string correctjudge)
+    IEnumerator PointUi(string correctjudge)
     {
         if (correctjudge == "correct") 
         {
             // 右プレイヤーのポイント判定
             if(player == "rightPlayer")
             {
+                yield return new WaitForSeconds(1f);
                 right_mukimuki[right_correctCount].GetComponent<SpriteRenderer>().color = new Color(right_mukimuki[0].GetComponent<SpriteRenderer>().color.r, right_mukimuki[0].GetComponent<SpriteRenderer>().color.g, right_mukimuki[0].GetComponent<SpriteRenderer>().color.b, 1f);
                 right_correctCount += 1;
             }else if(player == "leftPlayer")
             {
+                yield return new WaitForSeconds(1f);
                 left_mukimuki[left_correctCount].GetComponent<SpriteRenderer>().color = new Color(left_mukimuki[0].GetComponent<SpriteRenderer>().color.r, left_mukimuki[0].GetComponent<SpriteRenderer>().color.g, left_mukimuki[0].GetComponent<SpriteRenderer>().color.b, 1f);
                 left_correctCount += 1;
             }
         } else if(correctjudge == "incorrect") 
         {
             // 神のポイント増加\
+            yield return new WaitForSeconds(1f);
             god_mukimuki[god_correctCount].GetComponent<SpriteRenderer>().color = new Color(god_mukimuki[0].GetComponent<SpriteRenderer>().color.r, god_mukimuki[0].GetComponent<SpriteRenderer>().color.g, god_mukimuki[0].GetComponent<SpriteRenderer>().color.b, 1f);
             god_correctCount += 1;
         }
