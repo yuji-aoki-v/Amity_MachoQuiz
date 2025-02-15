@@ -4952,8 +4952,8 @@ MonoBehaviour:
   O_Button: {fileID: 1457896713}
   K_Button: {fileID: 952444168}
   L_Button: {fileID: 2066761049}
-  correctUi: {fileID: 0}
-  incorrectUi: {fileID: 0}
+  correctUi: {fileID: 52835955}
+  incorrectUi: {fileID: 1753384935}
   right_correctUi: {fileID: 894211932}
   left_correctUi: {fileID: 675478709}
   right_incorrectUi: {fileID: 787369020}
@@ -8230,8 +8230,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1753384936}
   - {fileID: 52835956}
+  - {fileID: 1753384936}
   - {fileID: 1308572884}
   - {fileID: 787369021}
   - {fileID: 675478710}
