@@ -24,9 +24,9 @@ public class Macho_GameManager : MonoBehaviour
     public string player = "";
     private string fullText; // 問題文代入用
     private string currentText = ""; // 現在の問題文を徐々に代入
-    private bool isKeyDownEnabled = true; // KeyDownの有効・無効フラグ
-    private bool isKeyDownEnabledLeft = true; // 左プレイヤーのKeyDownの有効・無効フラグ
-    private bool isKeyDownEnabledRight = true; // 右プレイヤーのKeyDownの有効・無効フラグ
+    private bool isKeyDownEnabled = false; // KeyDownの有効・無効フラグ
+    private bool isKeyDownEnabledLeft = false; // 左プレイヤーのKeyDownの有効・無効フラグ
+    private bool isKeyDownEnabledRight = false; // 右プレイヤーのKeyDownの有効・無効フラグ
     private int correctAnswerNum = 0; // 正解番号
 
     // オブジェクト用フィールド
