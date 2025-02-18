@@ -36,9 +36,11 @@ public class Macho_GameManager : MonoBehaviour
 
     // オブジェクト用フィールド
     private Animator animator;
+    public AudioSource bgmAudio;
     public AudioSource correctAudio;
     public AudioSource incorrectAudio;
     public AudioSource thunderAudio;
+    public AudioSource gameoverAudio;
     //public AudioSource quizAudio;
     public GameObject Panel;
     public GameObject Canvas;
@@ -127,6 +129,8 @@ public class Macho_GameManager : MonoBehaviour
         correctAudio = GameObject.Find("correctAudio").GetComponent<AudioSource>();
         incorrectAudio = GameObject.Find("incorrectAudio").GetComponent<AudioSource>();
         thunderAudio = GameObject.Find("thunderAudio").GetComponent<AudioSource>();
+        bgmAudio = GameObject.Find("BGM").GetComponent<AudioSource>();
+        gameoverAudio = GameObject.Find("gameoverAudio").GetComponent<AudioSource>();
         //quizAudio = GameObject.Find("quizAudio").GetComponent<AudioSource>();
         // 変数初期化
         listNum = 0;
@@ -535,6 +539,8 @@ public class Macho_GameManager : MonoBehaviour
                 banditleft.DeathGame();
 
                 yield return new WaitForSeconds(3f);
+                bgmAudio.Stop();
+                gameoverAudio.Play();
                 resultText.text = "ゲームオーバー";
             }else if(quizNum.text == "7")
             {
