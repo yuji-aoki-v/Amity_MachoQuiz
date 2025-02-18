@@ -3618,7 +3618,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 97748655}
   m_HandleRect: {fileID: 97748654}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -5391,7 +5391,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1739451150}
         m_TargetAssemblyTypeName: AddData, Assembly-CSharp
-        m_MethodName: Reload
+        m_MethodName: ReloadMacho
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

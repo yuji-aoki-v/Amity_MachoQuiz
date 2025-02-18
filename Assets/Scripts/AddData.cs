@@ -72,8 +72,13 @@ public class AddData : MonoBehaviour
         }
     }
 
-    public void Reload()
+    public void ReloadMacho()
     {
         SceneManager.LoadScene("MachoQuizData");
+    }
+
+    public void ReloadHobby()
+    {
+        SceneManager.LoadScene("HobbyQuizData");
     }
 }
