@@ -12,20 +12,10 @@ public class LeftTunderExplosion : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void LeftThunder()
     {
-        // スペースキーが押されたら、explosionPrefabが表示され、Destoroyされる
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-        //    Destroy(this.gameObject);
-        //}
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GameObject effect = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-            Destroy(this.gameObject);
-            Destroy(effect, 1.1f);
-        }
+        GameObject effect = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        Destroy(this.gameObject);
+        Destroy(effect, 1.1f);
     }
 }

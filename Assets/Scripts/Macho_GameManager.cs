@@ -16,6 +16,8 @@ public class Macho_GameManager : MonoBehaviour
     private AttackLeft attackleft;
     private BanditRight banditright;
     private BanditLeft banditleft;
+    private LeftTunderExplosion leftThunder;
+    private SquareExplosion rightThunder;
     public int listNum; // クイズ数をカウント
     public int judge = 0; // 正解か不正解を判断する
     public int correctCount = 0; // 正解数
@@ -36,6 +38,7 @@ public class Macho_GameManager : MonoBehaviour
     private Animator animator;
     public AudioSource correctAudio;
     public AudioSource incorrectAudio;
+    public AudioSource thunderAudio;
     //public AudioSource quizAudio;
     public GameObject Panel;
     public GameObject Canvas;
@@ -119,8 +122,11 @@ public class Macho_GameManager : MonoBehaviour
         attackleft = FindObjectOfType<AttackLeft>();
         banditright = FindObjectOfType<BanditRight>();
         banditleft = FindObjectOfType<BanditLeft>();
+        leftThunder = FindObjectOfType<LeftTunderExplosion>();
+        rightThunder = FindObjectOfType<SquareExplosion>();
         correctAudio = GameObject.Find("correctAudio").GetComponent<AudioSource>();
         incorrectAudio = GameObject.Find("incorrectAudio").GetComponent<AudioSource>();
+        thunderAudio = GameObject.Find("thunderAudio").GetComponent<AudioSource>();
         //quizAudio = GameObject.Find("quizAudio").GetComponent<AudioSource>();
         // 変数初期化
         listNum = 0;
@@ -304,6 +310,9 @@ public class Macho_GameManager : MonoBehaviour
 
     IEnumerator TimeUp()
     {
+        SetKeyDownEnabled(false);
+        SetKeyDownEnabledRight(false);
+        SetKeyDownEnabledLeft(false);
         timeUpUi.SetActive(true);
         // タイムアップ処理
         yield return new WaitForSeconds(5f);
@@ -515,10 +524,14 @@ public class Macho_GameManager : MonoBehaviour
                 Canvas.SetActive(false);
                 attackright.Attack_Right();
                 yield return new WaitForSeconds(0.9f);
+                rightThunder.RightThunder();
+                thunderAudio.Play();
                 banditright.DeathGame();
                 yield return new WaitForSeconds(1f);
                 attackleft.Attack_Left();
                 yield return new WaitForSeconds(0.7f);
+                leftThunder.LeftThunder();
+                thunderAudio.Play();
                 banditleft.DeathGame();
 
                 yield return new WaitForSeconds(3f);
