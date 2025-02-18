@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AquareExplosion : MonoBehaviour
+public class LeftTunderExplosion : MonoBehaviour
 {
     [SerializeField] GameObject explosionPrefab;
 
