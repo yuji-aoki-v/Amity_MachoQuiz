@@ -11,10 +11,8 @@ public class AttackRight : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Attack_Right()
     {
-        // マウスボタンクリックでマッチョ神が右腕を振りかざす
-        if (Input.GetMouseButtonUp(0))
-            GetComponent<Animator>().SetTrigger("Attack Right");
+        GetComponent<Animator>().SetTrigger("Attack Right");
     }
 }

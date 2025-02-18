@@ -11,29 +11,58 @@ using Newtonsoft.Json.Linq; // Newtonsoft.Jsonを使用するために必要 // 
 /*--------------------------------------------------------------------------------------------*/
 public class Macho_GameManager : MonoBehaviour
 {
-    // 大橋変更分
     // フィールド
+    private AttackRight attackright;
+    private AttackLeft attackleft;
+    private BanditRight banditright;
+    private BanditLeft banditleft;
     public int listNum; // クイズ数をカウント
     public int judge = 0; // 正解か不正解を判断する
     public int correctCount = 0; // 正解数
+    public int right_correctCount = 0; // 正解数
+    public int left_correctCount = 0; // 正解数
+    public int god_correctCount = 0; // 正解数
     public int coroutineStopJudge = 0; // コルーチン停止判定
     public float typingSpeed = 0.02f; // 文章出すスピード
+    public string player = "";
     private string fullText; // 問題文代入用
     private string currentText = ""; // 現在の問題文を徐々に代入
-    private bool isKeyDownEnabled = true; // KeyDownの有効・無効フラグ
-    private bool isKeyDownEnabledLeft = true; // 左プレイヤーのKeyDownの有効・無効フラグ
-    private bool isKeyDownEnabledRight = true; // 右プレイヤーのKeyDownの有効・無効フラグ
+    private bool isKeyDownEnabled = false; // KeyDownの有効・無効フラグ
+    private bool isKeyDownEnabledLeft = false; // 左プレイヤーのKeyDownの有効・無効フラグ
+    private bool isKeyDownEnabledRight = false; // 右プレイヤーのKeyDownの有効・無効フラグ
     private int correctAnswerNum = 0; // 正解番号
 
     // オブジェクト用フィールド
+    private Animator animator;
+    public AudioSource correctAudio;
+    public AudioSource incorrectAudio;
+    //public AudioSource quizAudio;
+    public GameObject Panel;
+    public GameObject Canvas;
+    public GameObject Q_Button;
+    public GameObject W_Button;
+    public GameObject A_Button;
+    public GameObject S_Button;
+    public GameObject I_Button;
+    public GameObject O_Button;
+    public GameObject K_Button;
+    public GameObject L_Button;
     public GameObject correctUi; // 〇
     public GameObject incorrectUi; // ×
+    public GameObject right_correctUi; // 〇
+    public GameObject left_correctUi; // 〇
+    public GameObject right_incorrectUi; // ×
+    public GameObject left_incorrectUi; // ×
+    public GameObject right_ele;
+    public GameObject left_ele;
     public GameObject nextQuizUi; // クイズ進行画面
     public GameObject resultUi; // リザルト画面
     public GameObject timeUpUi;
-    public GameObject[] mukimuki;
+    public GameObject[] right_mukimuki;
+    public GameObject[] left_mukimuki;
+    public GameObject[] god_mukimuki;
     public Button correctButton; // 正解のボタン
-    public TextMeshProUGUI resultNumber; // リザルトの正解数文字
+    public TextMeshProUGUI resultText; // リザルトの正解数文字
     public TextMeshProUGUI nextQuizeText; // 次のクイズ表示用ボタンの文字
 
     // jsonファイル対応用unity内フィールド
@@ -47,7 +76,7 @@ public class Macho_GameManager : MonoBehaviour
     public TextMeshProUGUI timeText;
 
     // FirestoreのURL
-    private string firestoreUrl = "https://firestore.googleapis.com/v1/projects/amity-4bad3/databases/(default)/documents/hobbyQuiz/quiz";
+    private string firestoreUrl = "https://firestore.googleapis.com/v1/projects/amity-4bad3/databases/(default)/documents/machoQuiz/quiz";
     // 表示済みクイズ追跡
     private List<int> displayedQuizIndices = new List<int>(){0};
     // 表示可能問題番号
@@ -60,20 +89,20 @@ public class Macho_GameManager : MonoBehaviour
     // ボタンの位置のランダム値リスト
     private Vector2[] positions = new Vector2[]
     {
-        new Vector2(-104, -95)
-        ,new Vector2(96,-95)
-        ,new Vector2(-104,-155)
-        ,new Vector2(96, -155)
+        new Vector2(-100, -68)
+        ,new Vector2(100, -68)
+        ,new Vector2(-100, -128)
+        ,new Vector2(100, -128)
     };
 
     // jsonファイル用のクラスと変数を定義
     [System.Serializable]
     public class QuizValue{
-        public string quiz_json;
-        public string button1_json;
-        public string button2_json;
-        public string button3_json;
-        public string button4_json;
+        public string quiztext;
+        public string button1;
+        public string button2;
+        public string button3;
+        public string button4;
     }
 
     // jsonファイル用のリストを定義
@@ -86,10 +115,17 @@ public class Macho_GameManager : MonoBehaviour
     // jsonファイル読み込み＆初回表示
     void Start()
     {
+        attackright = FindObjectOfType<AttackRight>();
+        attackleft = FindObjectOfType<AttackLeft>();
+        banditright = FindObjectOfType<BanditRight>();
+        banditleft = FindObjectOfType<BanditLeft>();
+        correctAudio = GameObject.Find("correctAudio").GetComponent<AudioSource>();
+        incorrectAudio = GameObject.Find("incorrectAudio").GetComponent<AudioSource>();
+        //quizAudio = GameObject.Find("quizAudio").GetComponent<AudioSource>();
         // 変数初期化
         listNum = 0;
         // 1からxまでの数字をリストに追加(x=クイズ数)
-        for (int i = 1; i <= 44; i++)
+        for (int i = 1; i <= 30; i++)
         {
             possibleNumbers .Add(i);
         }
@@ -106,9 +142,14 @@ public class Macho_GameManager : MonoBehaviour
             timeText.text = " ";
             StartCoroutine(TimeUp());
         }
-
-        ControlLeftPlayer();
-        ControlRightPlayer();
+        if(Panel.activeSelf)
+        {
+            
+        }else
+        {
+            ControlLeftPlayer();
+            ControlRightPlayer();  
+        }
     }
 
     // KeyDown イベントを有効化・無効化するメソッド
@@ -131,11 +172,45 @@ public class Macho_GameManager : MonoBehaviour
     // TODO: カリー化してプレイヤー番号を受け取る
     public void JudgeKeyDown(int ansNum)
     {
+        if(player == "rightPlayer")
+        {
+            right_ele.SetActive(true);
+        }else if(player == "leftPlayer")
+        {
+            left_ele.SetActive(true);
+        }
         if (ansNum == correctAnswerNum) {
             // TODO: プレイヤー番号に対応した人にポイント付与
             NextQuiz_correct();
+            StartCoroutine(PointUi("correct"));
         } else {
             NextQuiz_incorrect();
+            StartCoroutine(PointUi("incorrect"));
+        }
+    }
+
+    IEnumerator PointUi(string correctjudge)
+    {
+        if (correctjudge == "correct") 
+        {
+            // 右プレイヤーのポイント判定
+            if(player == "rightPlayer")
+            {
+                yield return new WaitForSeconds(1f);
+                right_mukimuki[right_correctCount].GetComponent<SpriteRenderer>().color = new Color(right_mukimuki[0].GetComponent<SpriteRenderer>().color.r, right_mukimuki[0].GetComponent<SpriteRenderer>().color.g, right_mukimuki[0].GetComponent<SpriteRenderer>().color.b, 1f);
+                right_correctCount += 1;
+            }else if(player == "leftPlayer")
+            {
+                yield return new WaitForSeconds(1f);
+                left_mukimuki[left_correctCount].GetComponent<SpriteRenderer>().color = new Color(left_mukimuki[0].GetComponent<SpriteRenderer>().color.r, left_mukimuki[0].GetComponent<SpriteRenderer>().color.g, left_mukimuki[0].GetComponent<SpriteRenderer>().color.b, 1f);
+                left_correctCount += 1;
+            }
+        } else if(correctjudge == "incorrect") 
+        {
+            // 神のポイント増加\
+            yield return new WaitForSeconds(1f);
+            god_mukimuki[god_correctCount].GetComponent<SpriteRenderer>().color = new Color(god_mukimuki[0].GetComponent<SpriteRenderer>().color.r, god_mukimuki[0].GetComponent<SpriteRenderer>().color.g, god_mukimuki[0].GetComponent<SpriteRenderer>().color.b, 1f);
+            god_correctCount += 1;
         }
     }
 
@@ -150,6 +225,8 @@ public class Macho_GameManager : MonoBehaviour
             SetKeyDownEnabled(false);
             SetKeyDownEnabledLeft(false);
             
+            Q_Button.GetComponent<Image>().color = Color.green; Invoke("ResetButtonColor", 1f);
+            player = "leftPlayer";
             JudgeKeyDown(0);
         }
         if (Input.GetKeyDown(KeyCode.W))
@@ -157,6 +234,8 @@ public class Macho_GameManager : MonoBehaviour
             SetKeyDownEnabled(false);
             SetKeyDownEnabledLeft(false);
             
+            W_Button.GetComponent<Image>().color = Color.green; Invoke("ResetButtonColor", 1f);
+            player = "leftPlayer";
             JudgeKeyDown(1);
         }
         if (Input.GetKeyDown(KeyCode.A))
@@ -164,6 +243,8 @@ public class Macho_GameManager : MonoBehaviour
             SetKeyDownEnabled(false);
             SetKeyDownEnabledLeft(false);
             
+            A_Button.GetComponent<Image>().color = Color.green; Invoke("ResetButtonColor", 1f);
+            player = "leftPlayer";
             JudgeKeyDown(2);
         }
         if (Input.GetKeyDown(KeyCode.S))
@@ -171,6 +252,8 @@ public class Macho_GameManager : MonoBehaviour
             SetKeyDownEnabled(false);
             SetKeyDownEnabledLeft(false);
             
+            S_Button.GetComponent<Image>().color = Color.green; Invoke("ResetButtonColor", 1f);
+            player = "leftPlayer";
             JudgeKeyDown(3);
         }
     }
@@ -186,6 +269,8 @@ public class Macho_GameManager : MonoBehaviour
             SetKeyDownEnabled(false);
             SetKeyDownEnabledRight(false);
 
+            I_Button.GetComponent<Image>().color = Color.green; Invoke("ResetButtonColor", 1f);
+            player = "rightPlayer";
             JudgeKeyDown(0);
         }
         if (Input.GetKeyDown(KeyCode.O))
@@ -193,6 +278,8 @@ public class Macho_GameManager : MonoBehaviour
             SetKeyDownEnabled(false);
             SetKeyDownEnabledRight(false);
             
+            O_Button.GetComponent<Image>().color = Color.green; Invoke("ResetButtonColor", 1f);
+            player = "rightPlayer";
             JudgeKeyDown(1);
         }
         if (Input.GetKeyDown(KeyCode.K))
@@ -200,6 +287,8 @@ public class Macho_GameManager : MonoBehaviour
             SetKeyDownEnabled(false);
             SetKeyDownEnabledRight(false);
             
+            K_Button.GetComponent<Image>().color = Color.green; Invoke("ResetButtonColor", 1f);
+            player = "rightPlayer";
             JudgeKeyDown(2);
         }
         if (Input.GetKeyDown(KeyCode.L))
@@ -207,6 +296,8 @@ public class Macho_GameManager : MonoBehaviour
             SetKeyDownEnabled(false);
             SetKeyDownEnabledRight(false);
             
+            L_Button.GetComponent<Image>().color = Color.green; Invoke("ResetButtonColor", 1f);
+            player = "rightPlayer";
             JudgeKeyDown(3);
         }
     }
@@ -238,6 +329,7 @@ public class Macho_GameManager : MonoBehaviour
     // 次のクイズへ
     public void NextQuiz()
     {
+        player = "";
         // タイムリミットリセット処理
         StartOrResetTimeLimit();
         // 新しいコルーチンを開始
@@ -247,6 +339,8 @@ public class Macho_GameManager : MonoBehaviour
         // ボダンランダム配置
         SetRandomPosition();
         GetDataFromFirestore();
+        //quizAudio.Play();
+        Panel.SetActive(false);
         // nextQuizUi.SetActive(false);
     }
 
@@ -338,7 +432,7 @@ public class Macho_GameManager : MonoBehaviour
         }else
         {
             quizNum.text = (listNum + 1).ToString();
-            fullText = quizs[listNum].quiz_json;
+            fullText = quizs[listNum].quiztext;
 
             // キー入力有効化
             SetKeyDownEnabled(true);
@@ -346,10 +440,10 @@ public class Macho_GameManager : MonoBehaviour
             SetKeyDownEnabledRight(true);
 
             StartCoroutine(TypeText());
-            button1.text = quizs[listNum].button1_json;
-            button2.text = quizs[listNum].button2_json;
-            button3.text = quizs[listNum].button3_json;
-            button4.text = quizs[listNum].button4_json;
+            button1.text = quizs[listNum].button1;
+            button2.text = quizs[listNum].button2;
+            button3.text = quizs[listNum].button3;
+            button4.text = quizs[listNum].button4;
         }
     }
 
@@ -367,19 +461,19 @@ public class Macho_GameManager : MonoBehaviour
     // 正解の場合
     public void NextQuiz_correct()
     {
+        Panel.SetActive(true);
         timeText.text = " ";
         StartCoroutine(NextQuiz_coroutine(0));
         correctCount ++;
-        resultNumber.text = correctCount.ToString();
         coroutineStopJudge = 1;
     }
 
     // 不正解の場合
     public void NextQuiz_incorrect()
     {
+        Panel.SetActive(true);
         timeText.text = " ";
         StartCoroutine(NextQuiz_coroutine(1));
-        GetComponent<Animator>().SetTrigger("Attack Right");
     }
 
     // 正解不正解判定
@@ -387,12 +481,53 @@ public class Macho_GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         UiDisplayOn(judge);
+        if(judge == 1)
+        {
+            if(player == "rightPlayer")
+            {
+                attackright.Attack_Right();
+                yield return new WaitForSeconds(0.6f);
+                banditright.Death();
+            }else if(player == "leftPlayer")
+            {
+                attackleft.Attack_Left();
+                yield return new WaitForSeconds(0.6f);
+                banditleft.Death();
+            }
+        }
         correctButton.GetComponent<Image>().color = Color.green; Invoke("ResetButtonColor", 3f);
         yield return new WaitForSeconds(3f);
         UiDisplayOff(judge);
         listNum++;
-        if (quizNum.text == "5")
+        if (quizNum.text == "7" || right_correctCount==3 || left_correctCount==3 || god_correctCount==3)
         {
+            if(right_correctCount==3)
+            {
+                //右プレイヤー勝利
+                resultText.text = "右プレイヤーの勝利!!!";
+            }else if(left_correctCount==3)
+            {
+                //左プレイヤー勝利
+                resultText.text = "左プレイヤーの勝利!!!";
+            }else if(god_correctCount==3)
+            {
+                //ゲームオーバー処理
+                Canvas.SetActive(false);
+                attackright.Attack_Right();
+                yield return new WaitForSeconds(0.9f);
+                banditright.DeathGame();
+                yield return new WaitForSeconds(1f);
+                attackleft.Attack_Left();
+                yield return new WaitForSeconds(0.7f);
+                banditleft.DeathGame();
+
+                yield return new WaitForSeconds(3f);
+                resultText.text = "ゲームオーバー";
+            }else if(quizNum.text == "7")
+            {
+                resultText.text = correctCount.ToString() + "問 正解しました。";
+            }
+            Panel.SetActive(false);
             resultUi.SetActive(true);
         }
         else
@@ -404,13 +539,35 @@ public class Macho_GameManager : MonoBehaviour
     // 〇×を表示する
     void UiDisplayOn(int judge)
     {
+        right_ele.SetActive(false);
+        left_ele.SetActive(false);
         if (judge == 0)
         {
-            correctUi.SetActive(true);
+            correctAudio.Play();
+            if(player == "rightPlayer")
+            {
+                right_correctUi.SetActive(true);
+            }else if(player == "leftPlayer")
+            {
+                left_correctUi.SetActive(true);
+            }else
+            {
+                correctUi.SetActive(true);
+            }
         }
         else
         {
-            incorrectUi.SetActive(true);
+            incorrectAudio.Play();
+            if(player == "rightPlayer")
+            {
+                right_incorrectUi.SetActive(true);
+            }else if(player == "leftPlayer")
+            {
+                left_incorrectUi.SetActive(true);
+            }else
+            {
+                incorrectUi.SetActive(true);
+            }
         }
     }
 
@@ -419,11 +576,14 @@ public class Macho_GameManager : MonoBehaviour
     {
         if (judge == 0)
         {
+            right_correctUi.SetActive(false);
+            left_correctUi.SetActive(false);
             correctUi.SetActive(false);
-            // mukimuki[correctCount - 1].GetComponent<SpriteRenderer>().color = new Color(mukimuki[0].GetComponent<SpriteRenderer>().color.r, mukimuki[0].GetComponent<SpriteRenderer>().color.g, mukimuki[0].GetComponent<SpriteRenderer>().color.b, 1f);
         }
         else
         {
+            right_incorrectUi.SetActive(false);
+            left_incorrectUi.SetActive(false);
             incorrectUi.SetActive(false);
         }
     }
@@ -432,6 +592,14 @@ public class Macho_GameManager : MonoBehaviour
     void ResetButtonColor()
     {
         correctButton.GetComponent<Image>().color = Color.white; // 元の色に戻す
+        Q_Button.GetComponent<Image>().color = Color.white;
+        W_Button.GetComponent<Image>().color = Color.white;
+        A_Button.GetComponent<Image>().color = Color.white;
+        S_Button.GetComponent<Image>().color = Color.white;
+        I_Button.GetComponent<Image>().color = Color.white;
+        O_Button.GetComponent<Image>().color = Color.white;
+        K_Button.GetComponent<Image>().color = Color.white;
+        L_Button.GetComponent<Image>().color = Color.white;
     }
 
     // 再挑戦
@@ -457,8 +625,8 @@ public class Macho_GameManager : MonoBehaviour
     {
         // 含まれていない数字を取得
         possibleNumbers = possibleNumbers.Except(displayedQuizIndices).ToList();
-        // 含まれていない数字が存在する場合&クイズの出題数が5問以下の時
-        if (possibleNumbers.Count > 0 && listNum < 5)
+        // 含まれていない数字が存在する場合&クイズの出題数が7問以下の時
+        if (possibleNumbers.Count > 0 && listNum < 7)
         {
             randomNumber = possibleNumbers[Random.Range(0, possibleNumbers.Count)]; // ランダムに選択
             displayedQuizIndices.Add(randomNumber); // 選ばれた数字をリストに追加
@@ -513,11 +681,11 @@ public class Macho_GameManager : MonoBehaviour
             // Firestoreのレスポンスの各フィールドにアクセス
             QuizValue quizValue = new QuizValue
             {
-                quiz_json = fields["quiz_json"]?["stringValue"]?.ToString(),
-                button1_json = fields["button1_json"]?["stringValue"]?.ToString(),
-                button2_json = fields["button2_json"]?["stringValue"]?.ToString(),
-                button3_json = fields["button3_json"]?["stringValue"]?.ToString(),
-                button4_json = fields["button4_json"]?["stringValue"]?.ToString()
+                quiztext = fields["quiztext"]?["stringValue"]?.ToString(),
+                button1 = fields["button1"]?["stringValue"]?.ToString(),
+                button2 = fields["button2"]?["stringValue"]?.ToString(),
+                button3 = fields["button3"]?["stringValue"]?.ToString(),
+                button4 = fields["button4"]?["stringValue"]?.ToString()
             };
 
             // 作成したQuizValueオブジェクトをリストに追加
@@ -546,5 +714,10 @@ public class Macho_GameManager : MonoBehaviour
     public class FirestoreStringValue
     {
         public string stringValue; // 各フィールドの値
+    }
+
+    public void StageSelect()
+    {
+        SceneManager.LoadScene("StageSelect");
     }
 }
