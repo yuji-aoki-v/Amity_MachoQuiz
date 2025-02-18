@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Networking;
 using Newtonsoft.Json.Linq;
+using UnityEngine.SceneManagement;
 
 public class AddData : MonoBehaviour
 {
@@ -45,7 +46,6 @@ public class AddData : MonoBehaviour
         };
 
         string url = firestoreBaseUrl + docName; // 指定した名前のドキュメントに保存
-        Debug.Log("Request URL: " + url);
         StartCoroutine(PostDataToFirestore(url, quizData.ToString()));
     }
 
@@ -63,11 +63,17 @@ public class AddData : MonoBehaviour
             if (request.result == UnityWebRequest.Result.Success)
             {
                 Debug.Log("Firestoreにデータを追加成功: " + request.downloadHandler.text);
+                SceneManager.LoadScene("MachoQuizData");
             }
             else
             {
                 Debug.LogError("Firestoreへのデータ追加に失敗: " + request.error);
             }
         }
+    }
+
+    public void Reload()
+    {
+        SceneManager.LoadScene("MachoQuizData");
     }
 }
